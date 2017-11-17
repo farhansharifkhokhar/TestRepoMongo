@@ -9,6 +9,7 @@ import com.stepsolar.sr.entities.User;
 import com.stepsolar.sr.repository.UserRepository;
 import com.stepsolar.sr.services.UserService;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User save(User user) {
-		if (user.getId() == null) {
+		if (user.getId() == null || StringUtils.isEmpty(user.getId() ) == true) {
 			user.setPassword(passwordEncoder.encode(user.getPassword() != null ? user.getPassword() : "password"));
 		} else {
 			User alreadyExists = userRepository.findOne(user.getId());
