@@ -88,7 +88,7 @@ public class AuthenticationController {
 
 		User authenticationUser = userService.findByEmail(authenticationRequest.getEmail());
 		if (authenticationUser == null) {
-			apiResponse = ApiErrorRespone.buildGenericError(ErrorTypeConstants.NOT_FOUND_EXCEPTION,
+			apiResponse = exceptionHandler.ApiErrorRespone.buildGenericError(ErrorTypeConstants.NOT_FOUND_EXCEPTION,
 					HttpStatus.NOT_FOUND.toString(), messageSource.getMessage("login.user.not.found", null, locale));
 			return new ResponseEntity<Object>(apiResponse, new HttpHeaders(), HttpStatus.NOT_FOUND);
 		}
