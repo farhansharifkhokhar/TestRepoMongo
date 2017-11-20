@@ -5,10 +5,21 @@
  */
 package com.stepsolar.sr.entities;
 
+/**
+ * Created by Farhan Sharif Khokhar 19/11/2017.
+ */
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -21,131 +32,128 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-/**
- * Created by Farhan Sharif Khokhar 16/11/2017.
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Document(collection = "User")
 public class User implements UserDetails {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    public String id;
-    @Indexed(unique = true)
-    private String email;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private long mobileNumber;
-    private List<String> roles;
-  @JsonIgnore
-    @Transient
-    private List<GrantedAuthority> authority = AuthorityUtils.createAuthorityList(new String[]{"ROLE_USER"});
-    
-  public String getId() {
-        return id;
-    }
+	private static final long serialVersionUID = 1L;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public String id;
+	@Indexed(unique = true)
+	private String email;
+	private String password;
+	private String firstName;
+	private String lastName;
+	private long mobileNumber;
+	private List<String> roles;
+	@JsonIgnore
+	@Transient
+	private List<GrantedAuthority> authority = AuthorityUtils.createAuthorityList(new String[] { "ROLE_USER" });
 
-    public String getEmail() {
-        return email;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public long getMobileNumber() {
-        return mobileNumber;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setMobileNumber(long mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-  
+	public long getMobileNumber() {
+		return mobileNumber;
+	}
 
-    @JsonIgnore
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+	public void setMobileNumber(long mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
 
-    @JsonIgnore
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+	@JsonIgnore
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
 
-    @JsonIgnore
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+	@JsonIgnore
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
 
-    @JsonIgnore
-    @Override
-    public String getUsername() {
-        return email;
-    }
+	@JsonIgnore
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
 
-    @JsonIgnore
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+	@JsonIgnore
+	@Override
+	public String getUsername() {
+		return email;
+	}
 
-    @Override
-    @JsonIgnore
-    public List<GrantedAuthority> getAuthorities() {
-        return this.authority;
-    }
+	@JsonIgnore
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 
-    @JsonIgnore
-    public void setAuthorities(String authority) {
-        List<String> roles = new ArrayList<>();
-        for (GrantedAuthority grantedAuthority : this.authority) {
-            roles.add(grantedAuthority.getAuthority());
-        }
-        if (authority.length() > 0) {
-            roles.add(authority);
-        }
+	@Override
+	@JsonIgnore
+	public List<GrantedAuthority> getAuthorities() {
+		return this.authority;
+	}
 
-        this.authority = AuthorityUtils.createAuthorityList(roles.toArray(new String[roles.size()]));
-    }
+	@JsonIgnore
+	public void setAuthorities(String authority) {
+		List<String> roles = new ArrayList<>();
+		for (GrantedAuthority grantedAuthority : this.authority) {
+			roles.add(grantedAuthority.getAuthority());
+		}
+		if (authority.length() > 0) {
+			roles.add(authority);
+		}
 
-    @JsonIgnore
-    public boolean hasRole(String role) {
-        Collection<? extends GrantedAuthority> authorities = this.authority;
-        return authorities.contains(new SimpleGrantedAuthority(role));
+		this.authority = AuthorityUtils.createAuthorityList(roles.toArray(new String[roles.size()]));
+	}
 
-    }
+	@JsonIgnore
+	public boolean hasRole(String role) {
+		Collection<? extends GrantedAuthority> authorities = this.authority;
+		return authorities.contains(new SimpleGrantedAuthority(role));
+
+	}
 
 }

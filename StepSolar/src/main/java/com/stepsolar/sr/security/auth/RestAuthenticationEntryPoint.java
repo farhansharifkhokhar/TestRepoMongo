@@ -1,7 +1,7 @@
 package com.stepsolar.sr.security.auth;
 
 /**
- * Created by fan.jin on 2016-11-12.
+ * Created by Farhan Sharif Khokhar 19/11/2017.
  */
 
 import org.springframework.security.core.AuthenticationException;
@@ -12,19 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by Farhan Sharif Khokhar 16/11/2017.
- */
 @Component
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
-    @Override
-    public void commence(HttpServletRequest request,
-                         HttpServletResponse response,
-                         AuthenticationException authException) throws IOException {
-        // This is invoked when user tries to access a secured REST resource without supplying any credentials
-        // We should just send a 401 Unauthorized response because there is no 'login page' to redirect to
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
-    }
+	@Override
+	public void commence(HttpServletRequest request, HttpServletResponse response,
+			AuthenticationException authException) throws IOException {
+		// This is invoked when user tries to access a secured REST resource without
+		// supplying any credentials
+		// We should just send a 401 Unauthorized response because there is no 'login
+		// page' to redirect to
+		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
+	}
 }
-

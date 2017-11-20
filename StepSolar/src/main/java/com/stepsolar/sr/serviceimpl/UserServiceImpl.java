@@ -5,19 +5,18 @@
  */
 package com.stepsolar.sr.serviceimpl;
 
-import com.stepsolar.sr.entities.User;
-import com.stepsolar.sr.repository.UserRepository;
-import com.stepsolar.sr.services.UserService;
-
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by Farhan Sharif Khokhar 16/11/2017.
+ * Created by Farhan Sharif Khokhar 19/11/2017.
  */
+import com.stepsolar.sr.entities.User;
+import com.stepsolar.sr.repository.UserRepository;
+import com.stepsolar.sr.services.UserService;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -39,12 +38,21 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User save(User user) {
-		if (user.getId() == null || StringUtils.isEmpty(user.getId() ) == true) {
+
+		if (user.getId() != null) {
+			User u = userRepository.findOne(user.getId());
+
+			// Do not update if password was not defined
+			if (org.springframework.util.StringUtils.hasText(user.getPassword())) {
+				user.setPassword(passwordEncoder.encode(user.getPassword()));
+			} else {
+				user.setPassword(u.getPassword());
+			}
+		} else if (user.getId() == null) {
+			// TODO Do not hardcode default pass
 			user.setPassword(passwordEncoder.encode(user.getPassword() != null ? user.getPassword() : "password"));
-		} else {
-			User alreadyExists = userRepository.findOne(user.getId());
-			user.setPassword(alreadyExists.getPassword());
 		}
+
 		return userRepository.save(user);
 	}
 

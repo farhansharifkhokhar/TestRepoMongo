@@ -1,5 +1,8 @@
 package com.stepsolar.sr.security.auth;
 
+/**
+ * Created by Farhan Sharif Khokhar 19/11/2017.
+ */
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -12,24 +15,22 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-/**
- * Created by Farhan Sharif Khokhar 16/11/2017.
- */
+
 @Component
 public class LogoutSuccess implements LogoutSuccessHandler {
 
-    @Autowired
-    ObjectMapper objectMapper;
+	@Autowired
+	ObjectMapper objectMapper;
 
-    @Override
-    public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse response, Authentication authentication)
-            throws IOException, ServletException {
-        Map<String, String> result = new HashMap<>();
-        result.put( "result", "success" );
-        response.setContentType("application/json");
-        response.getWriter().write( objectMapper.writeValueAsString( result ) );
-        response.setStatus(HttpServletResponse.SC_OK);
+	@Override
+	public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse response,
+			Authentication authentication) throws IOException, ServletException {
+		Map<String, String> result = new HashMap<>();
+		result.put("result", "success");
+		response.setContentType("application/json");
+		response.getWriter().write(objectMapper.writeValueAsString(result));
+		response.setStatus(HttpServletResponse.SC_OK);
 
-    }
+	}
 
 }

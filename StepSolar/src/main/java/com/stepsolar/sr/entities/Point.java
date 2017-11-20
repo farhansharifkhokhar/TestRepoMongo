@@ -1,5 +1,7 @@
 package com.stepsolar.sr.entities;
-
+/**
+ * Created by Farhan Sharif Khokhar 19/11/2017.
+ */
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -204,7 +206,6 @@ public class Point {
 	public void setArrayId(String arrayId) {
 		this.arrayId = arrayId;
 	}
-
 
 	public String getTimeStamp() {
 		return timeStamp;

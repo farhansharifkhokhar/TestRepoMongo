@@ -1,5 +1,8 @@
 package com.stepsolar.sr.entities;
 
+/**
+ * Created by Farhan Sharif Khokhar 19/11/2017.
+ */
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,71 +21,65 @@ import org.hibernate.ogm.options.shared.IndexOptions;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-
 @Entity
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Table(indexes = {
-		@Index(columnList = "userId", name = "userId_idx"),
-		@Index(columnList = "name", name = "name_idx")
-})
-@IndexOptions(
-		@IndexOption(forIndex = "name_email_text_idx", options = "{ text: true, default_language : 'en', weights : { email: 2, name: 5 } }")
-)
+@Table(indexes = { @Index(columnList = "userId", name = "userId_idx"), @Index(columnList = "name", name = "name_idx") })
+@IndexOptions(@IndexOption(forIndex = "name_email_text_idx", options = "{ text: true, default_language : 'en', weights : { email: 2, name: 5 } }"))
 public class Client {
-	
+
 	@Id
 	private String id;
-	
+
 	@Transient
 	private String objectId;
-	
+
 	@Column
 	private String name;
-	
+
 	@Column
 	private String email;
-	
+
 	@Column
 	private String address;
-	
+
 	@Column
 	private String cellNo;
-	
+
 	@Column
 	private String weatherModel;
-	
+
 	@Column
 	private String energy;
-	
+
 	@Embedded
 	private ParseTypeFile photoUrl;
-	
+
 	@Transient
 	private InstallerUser installerUser;
-	
+
 	@Transient
 	private List<Array> arrayList;
-	
+
 	@Column
 	private String userId;
-	
+
 	@Column
 	private String managerId;
-	
+
 	@Column
 	private Double siteVisitDateTime;
-	
+
 	@Column
 	private Double leadPitchDateTime;
-	
+
 	@Column
 	private Double leadAssignmentDateTime;
 
-	@Column (name = "_created_at")
+	@Column(name = "_created_at")
 	private Date createdAt;
 
-	@Column (name = "_updated_at")
+	@Column(name = "_updated_at")
 	private Date updatedAt;
 
 	@Column
@@ -92,22 +89,16 @@ public class Client {
 	private String assignedTo;
 
 	/*
-	 Client Status Values
-		1) Not attempted
-		2) Attempted
-		3) Site Visit 
-		4) Quote 
-		5) Negotiation
-		
-		6) Sold 
-		7) Lost 
-		8) Not interested. 
-		
-		A client will be considered active as long as it is 1-5 
+	 * Client Status Values 1) Not attempted 2) Attempted 3) Site Visit 4) Quote 5)
+	 * Negotiation
+	 * 
+	 * 6) Sold 7) Lost 8) Not interested.
+	 * 
+	 * A client will be considered active as long as it is 1-5
 	 */
 	@Column
 	private String status = "Not attempted";
-	
+
 	public String getStatus() {
 		return status;
 	}
@@ -115,14 +106,14 @@ public class Client {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 	public Double getLeadAssignmentDateTime() {
 		return leadAssignmentDateTime;
 	}
 
 	public void setLeadAssignmentDateTime(Double leadAssigmentDateTime) {
 		this.leadAssignmentDateTime = leadAssigmentDateTime;
-//		org.hibernate.type.AnyType
+		// org.hibernate.type.AnyType
 	}
 
 	public Date getCreatedAt() {
@@ -235,7 +226,7 @@ public class Client {
 
 	public void setPhotoUrl(ParseTypeFile photoUrl) {
 		this.photoUrl = photoUrl;
-	}	
+	}
 
 	public String getObjectId() {
 		return objectId;

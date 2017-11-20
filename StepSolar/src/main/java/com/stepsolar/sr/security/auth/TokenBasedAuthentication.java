@@ -1,45 +1,44 @@
 package com.stepsolar.sr.security.auth;
 
+/**
+ * Created by Farhan Sharif Khokhar 19/11/2017.
+ */
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 
-
-/**
- * Created by Farhan Sharif Khokhar 16/11/2017.
- */
 public class TokenBasedAuthentication extends AbstractAuthenticationToken {
 
-    private static final long serialVersionUID = -5244891124123184312L;
-    
-    private String token;
-    private final UserDetails principal;
+	private static final long serialVersionUID = -5244891124123184312L;
 
-    public TokenBasedAuthentication( UserDetails principal ) {
-        super( principal.getAuthorities() );
-        this.principal = principal;
-    }
+	private String token;
+	private final UserDetails principal;
 
-    public String getToken() {
-        return token;
-    }
+	public TokenBasedAuthentication(UserDetails principal) {
+		super(principal.getAuthorities());
+		this.principal = principal;
+	}
 
-    public void setToken( String token ) {
-        this.token = token;
-    }
+	public String getToken() {
+		return token;
+	}
 
-    @Override
-    public boolean isAuthenticated() {
-        return true;
-    }
+	public void setToken(String token) {
+		this.token = token;
+	}
 
-    @Override
-    public Object getCredentials() {
-        return token;
-    }
+	@Override
+	public boolean isAuthenticated() {
+		return true;
+	}
 
-    @Override
-    public UserDetails getPrincipal() {
-        return principal;
-    }
+	@Override
+	public Object getCredentials() {
+		return token;
+	}
+
+	@Override
+	public UserDetails getPrincipal() {
+		return principal;
+	}
 
 }

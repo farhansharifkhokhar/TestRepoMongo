@@ -1,6 +1,5 @@
 package com.stepsolar.sr.entities;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -8,83 +7,86 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Created by Farhan Sharif Khokhar 19/11/2017.
+ */
 @Entity
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Array {
-	
+
 	@Id
 	private String id;
-	
+
 	@Transient
 	private String objectId;
-	
+
 	@Column
 	private Double inclination;
-	
+
 	@Column
 	private String productionParameters;
 
 	/************************
 	 ************************
 	 */
-	//	1- salePrice
-	//	2- moduleType
-	//	3- InverterEfficiency
-	//	4- mountType
-	//	5- arraySize
-	//	6- losses
-	
+	// 1- salePrice
+	// 2- moduleType
+	// 3- InverterEfficiency
+	// 4- mountType
+	// 5- arraySize
+	// 6- losses
+
 	@Column
 	private Double arraySize;
-	
+
 	@Column
 	private String salePrice;
-	
+
 	@Column
 	private String losses;
-	
+
 	@Column
 	private String inverterEfficiency;
-	
+
 	@Column
 	private Integer mountType;
-	
+
 	@Column
 	private Integer moduleType;
 	/************************
 	 ************************
 	 */
-	
+
 	@Column
 	private String userId;
-	
+
 	@Column
 	private String clientId;
-	
+
 	@Column
 	private String energy;
-	
+
 	@Column
 	private String name;
-	
+
 	@Column
 	private Double azimuth;
-	
+
 	@Column
 	private Double tilt;
-	
+
 	@Embedded
-	private ParseTypeFile photoUrl;	
-	
+	private ParseTypeFile photoUrl;
+
 	@Column
 	private String modificationDateTime;
-	
+
 	@Transient
 	private List<Point> pointList;
-	@Column (name = "_created_at")
+	@Column(name = "_created_at")
 	private Date createdAt;
 
-	@Column (name = "_updated_at")
+	@Column(name = "_updated_at")
 	private Date updatedAt;
 
 	public List<Point> getPointList() {
@@ -159,8 +161,8 @@ public class Array {
 	}
 
 	public Double getAzimuth() {
-		if ( azimuth == null ) {
-			//setting default after confirmation
+		if (azimuth == null) {
+			// setting default after confirmation
 			azimuth = 180d;
 		}
 
@@ -189,8 +191,8 @@ public class Array {
 	}
 
 	public Double getTilt() {
-		if ( tilt == null ) {
-			//setting default after confirmation
+		if (tilt == null) {
+			// setting default after confirmation
 			tilt = 17d;
 		}
 		return tilt;
@@ -275,7 +277,7 @@ public class Array {
 	public Point lastIncludedPoint() {
 		Point pointToReturn = null;
 		for (Point point : getPointList()) {
-			if(point.getIsIncluded()) {
+			if (point.getIsIncluded()) {
 				if (pointToReturn == null) {
 					pointToReturn = point;
 				} else if (point.getTimeStamp().compareTo(pointToReturn.getTimeStamp()) > 0) {

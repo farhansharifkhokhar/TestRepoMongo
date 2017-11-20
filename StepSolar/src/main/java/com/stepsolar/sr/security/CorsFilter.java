@@ -1,5 +1,7 @@
 package com.stepsolar.sr.security;
-
+/**
+ * Created by Farhan Sharif Khokhar 19/11/2017.
+ */
 import java.io.IOException;
 
 import javax.servlet.Filter;
@@ -12,9 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-/**
- * Created by Farhan Sharif Khokhar 16/11/2017.
- */
+
 @Component
 public class CorsFilter implements Filter {
     

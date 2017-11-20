@@ -6,7 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-
+/**
+ * Created by Farhan Sharif Khokhar 19/11/2017.
+ */
 @Embeddable
 public class Address {
 

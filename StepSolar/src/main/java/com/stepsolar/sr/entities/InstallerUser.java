@@ -1,5 +1,7 @@
 package com.stepsolar.sr.entities;
-
+/**
+ * Created by Farhan Sharif Khokhar 19/11/2017.
+ */
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

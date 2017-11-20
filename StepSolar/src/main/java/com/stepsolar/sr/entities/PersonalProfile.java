@@ -1,5 +1,8 @@
 package com.stepsolar.sr.entities;
 
+/**
+ * Created by Farhan Sharif Khokhar 19/11/2017.
+ */
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
@@ -7,53 +10,53 @@ import javax.persistence.Embedded;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Embeddable
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PersonalProfile {
 
 	@Column
 	String firstName;
-	
+
 	@Column
 	String middleName;
-	
+
 	@Column
 	String lastName;
-	
+
 	@Column
 	String fullName;
-	
+
 	@Embedded
 	private Address address;
 
 	@Column
 	String email;
-	
+
 	@Column
 	String gender;
-	
+
 	@Column
 	String phoneNumber;
-	
+
 	@Column
 	String mobileNumber;
-	
+
 	@Column
 	String skypeId;
-	
+
 	@Column
 	String personalLinkedinProfile;
-	
+
 	@Column
-	String profilePicture;	
-	
+	String profilePicture;
+
 	@Column
 	String resetPasswordId;
-	
+
 	@Column
 	String emailVerificationId;
-	
+
 	@Column
 	Boolean isVerified;
 
@@ -176,7 +179,5 @@ public class PersonalProfile {
 	public void setIsVerified(Boolean isVerified) {
 		this.isVerified = isVerified;
 	}
-	
-	
-	
+
 }

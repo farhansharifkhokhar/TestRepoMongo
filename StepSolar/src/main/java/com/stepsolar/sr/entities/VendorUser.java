@@ -1,5 +1,8 @@
 package com.stepsolar.sr.entities;
 
+/**
+ * Created by Farhan Sharif Khokhar 19/11/2017.
+ */
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,70 +17,58 @@ import javax.persistence.TableGenerator;
 @Entity
 public class VendorUser {
 	public VendorUser() {
-		
+
 	}
-	
+
 	@JsonCreator
-	public VendorUser(
-			@JsonProperty("userName") String userName,
-			@JsonProperty("userPassword") String userPassword,
+	public VendorUser(@JsonProperty("userName") String userName, @JsonProperty("userPassword") String userPassword,
 			@JsonProperty("personalProfile") PersonalProfile personalProfile,
 			@JsonProperty("companyProfile") CompanyProfile companyProfile,
-			@JsonProperty("vendorType") String vendorType,
-			@JsonProperty("userRole") String userRole			
-			){
+			@JsonProperty("vendorType") String vendorType, @JsonProperty("userRole") String userRole) {
 		this.userName = userName;
 		this.userPassword = userPassword;
 
 		this.personalProfile = personalProfile;
 		this.companyProfile = companyProfile;
-		
+
 		this.vendorType = vendorType;
 
 		this.userRole = userRole;
 
-
 	}
-	
+
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "stepSolarIdGenerator")
-    @TableGenerator(
-            name = "stepSolarIdGenerator",
-            table = "stepSolarSequence",
-            pkColumnValue = "allTypeUser",
-            allocationSize = 1,
-            valueColumnName = "nextAllTypeUserId"
-        )	
+	@TableGenerator(name = "stepSolarIdGenerator", table = "stepSolarSequence", pkColumnValue = "allTypeUser", allocationSize = 1, valueColumnName = "nextAllTypeUserId")
 	@Id
 	private long id;
-	
+
 	@Column
 	String userName;
-	
+
 	@Column
 	String userPassword;
-	
+
 	@Column
 	String vendorType;
-	
-	//Not a col, just to hold the value of user's active role
-	//@Transient
+
+	// Not a col, just to hold the value of user's active role
+	// @Transient
 	String userRole;
-	
+
 	@Column
 	String userRoles;
-	
+
 	@Column
 	String userToken;
-	
+
 	@Column
 	String gmt;
-	
+
 	@Embedded
 	private PersonalProfile personalProfile;
-	
+
 	@Embedded
 	private CompanyProfile companyProfile;
-	
 
 	public long getId() {
 		return id;

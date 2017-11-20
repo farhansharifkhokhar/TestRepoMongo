@@ -23,6 +23,9 @@ import com.stepsolar.sr.services.ClientService;
 
 import io.swagger.annotations.Api;
 
+/**
+ * Created by Farhan Sharif Khokhar 18/11/2017.
+ */
 @Api(tags = ("v2/Clients"))
 @RestController
 @RequestMapping(path = "api/v2/clients", produces = { "application/json" })
